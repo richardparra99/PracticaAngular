@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AprendiendoAngular": {
+    "mi-app": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -56,10 +66,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "AprendiendoAngular:build:production"
+              "buildTarget": "mi-app:build:production"
             },
             "development": {
-              "buildTarget": "AprendiendoAngular:build:development"
+              "buildTarget": "mi-app:build:development"
             }
           },
           "defaultConfiguration": "development"
