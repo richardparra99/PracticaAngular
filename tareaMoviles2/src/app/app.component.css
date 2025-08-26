@@ -1,0 +1,19 @@
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    margin-left: 10px;
+    padding: 11px 20px 11px 20px;
+    background-color: green;
+    border: 0 solid;
+    border-radius: 3px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input {
+    padding: 10px 10px 10px 10px;
+    border: 1 solid #808080;
+    font-family: Arial, Helvetica, sans-serif;
+}

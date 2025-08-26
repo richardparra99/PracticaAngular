@@ -1,0 +1,7 @@
+<div class="list">
+  <app-tarea
+    *ngFor="let t of tareas; trackBy: tareaId"
+    [tarea]="t"
+    (eliminar)="quitar.emit($event)">
+  </app-tarea>
+</div>

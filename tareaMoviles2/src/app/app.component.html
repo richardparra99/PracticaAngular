@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<div>
+  <input type="text"
+  placeholder="escribe nueva tarea..."
+  [(ngModel)]="nueva"
+  (keyup.enter)="agregar()">
+  <button (click)="agregar()">agregar</button>
+</div>
+<app-lista [tareas]="tareas" (quitar)="quitar($event)"></app-lista>
+
+<router-outlet />
