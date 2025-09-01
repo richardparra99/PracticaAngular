@@ -1,0 +1,7 @@
+{
+  "name": "apiAndComponent",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
