@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Blank
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item *ngFor="let user of userList">
+      <ion-label>
+        id:{{ user.id }}
+      </ion-label>
+      <ion-label>
+        name:{{ user.name }}
+      </ion-label>
+      <ion-label>
+        username:{{ user.username }}
+      </ion-label>
+      <ion-label>
+        email:{{ user.email }}
+      </ion-label>
+      <ion-label>
+        address:<br>
+        street:{{ user.address.street }}<br>
+        suite:{{ user.address.suite }}<br>
+        city:{{ user.address.city }}<br>
+        zipcode:{{ user.address.zipcode }}<br>
+        geo:<br>
+        lat:{{ user.address.geo.lat }}<br>
+        lng:{{ user.address.geo.lng }}
+      </ion-label>
+      <ion-label>
+        phone:{{ user.phone }}
+      </ion-label>
+      <ion-label>
+        website:{{ user.website }}
+      </ion-label>
+      <ion-label>
+        company:<br>
+        name:{{ user.company.name }}<br>
+        catchPhrase:{{ user.company.catchPhrase }}<br>
+        bs:{{ user.company.bs }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
