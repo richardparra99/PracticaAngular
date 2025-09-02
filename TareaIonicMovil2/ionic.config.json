@@ -1,0 +1,7 @@
+{
+  "name": "TareaIonicMovil2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
