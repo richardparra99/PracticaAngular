@@ -1,0 +1,38 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-input [formControl]="numero" inputmode="decimal" type="text" readonly></ion-input>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="column" (click)="setOperacion('+')">+</ion-col>
+      <ion-col class="column" (click)="setOperacion('-')">-</ion-col>
+      <ion-col class="column" (click)="setOperacion('x')">x</ion-col>
+      <ion-col class="column" (click)="setOperacion('/')">/</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="column" (click)="setNumero(1)">1</ion-col>
+      <ion-col class="column" (click)="setNumero(2)">2</ion-col>
+      <ion-col class="column" (click)="setNumero(3)">3</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="column" (click)="setNumero(4)">4</ion-col>
+      <ion-col class="column" (click)="setNumero(5)">5</ion-col>
+      <ion-col class="column" (click)="setNumero(6)">6</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="column" (click)="setNumero(7)">7</ion-col>
+      <ion-col class="column" (click)="setNumero(8)">8</ion-col>
+      <ion-col class="column" (click)="setNumero(9)">9</ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="column" (click)="clearAll()">C</ion-col>
+      <ion-col class="column" (click)="setNumero(0)">0</ion-col>
+      <ion-col class="column" (click)="resultado()">=</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
