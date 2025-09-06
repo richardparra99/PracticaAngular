@@ -1,0 +1,7 @@
+{
+  "name": "componentAndGrip",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
