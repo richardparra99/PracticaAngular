@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!loading(); else loadingTpl">
+  <ion-card *ngIf="product() as p">
+    <img [src]="p.image" alt="{{ p.title }}"
+         style="height:320px; width:100%; object-fit:contain; background:#fff;">
+    <ion-card-header>
+      <ion-card-title>{{ p.title }}</ion-card-title>
+      <ion-card-subtitle>{{ p.category }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <ng-container *ngFor="let s of stars(p.rating?.rate)">
+          <ion-icon [name]="s"></ion-icon>
+        </ng-container>
+        <ion-badge *ngIf="p.rating" color="medium">
+          {{ p.rating.rate | number:'1.1-1' }} • {{ p.rating.count }} reseñas
+        </ion-badge>
+      </div>
+
+      <h2 style="margin-top:12px;">Bs {{ p.price | number:'1.2-2' }}</h2>
+      <p style="margin-top:12px;">{{ p.description }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ng-template #loadingTpl>
+  <ion-content>
+    <ion-spinner style="display:block;margin:24px auto;"></ion-spinner>
+  </ion-content>
+</ng-template>
+

@@ -1,20 +1,83 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Fake Store</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Pull to refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="loadProducts(selected() === 'Todos' ? undefined : selected()); $event.target.complete()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <!-- Buscador -->
+  <ion-searchbar placeholder="Buscar productos..."
+                 (ionInput)="onSearch($event)"
+                 style="--box-shadow:none; margin: 10px 12px;"></ion-searchbar>
+
+  <!-- Chips de categorías -->
+  <div style="padding: 0 12px 6px; overflow-x:auto; white-space:nowrap;">
+    <ion-chip *ngFor="let cat of categories()"
+              [outline]="selected() !== cat"
+              (click)="onSelect(cat)"
+              style="margin-right:8px">
+      <ion-label>{{ cat }}</ion-label>
+    </ion-chip>
   </div>
+
+  <!-- Estado -->
+  <ion-text color="danger" *ngIf="error()">
+    <p style="padding: 12px;">{{ error() }}</p>
+  </ion-text>
+
+  <!-- Skeletons mientras carga -->
+  <ng-container *ngIf="loading(); else listTpl">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" sizeMd="6" sizeLg="4" *ngFor="let s of [1,2,3,4,5,6]">
+          <ion-card>
+            <ion-skeleton-text [animated]="true" style="height:220px"></ion-skeleton-text>
+            <ion-card-header>
+              <ion-skeleton-text [animated]="true" style="width:80%"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width:40%; margin-top:6px"></ion-skeleton-text>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-skeleton-text [animated]="true" style="width:30%"></ion-skeleton-text>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+
+  <!-- Lista -->
+  <ng-template #listTpl>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" sizeMd="6" sizeLg="4"
+                 *ngFor="let p of filtered(); trackBy: trackById">
+          <ion-card [routerLink]=" ['/product', p.id]" style="cursor:pointer;">
+            <img ngSrc="{{ p.image }}" width="400" height="300"
+                 alt="{{ p.title }}"
+                 style="height:240px; width:100%; object-fit:contain; background:#fff;">
+            <ion-card-header>
+              <ion-card-title class="card-title">{{ p.title }}</ion-card-title>
+              <ion-card-subtitle>{{ p.category }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content class="card-content">
+              <div class="stars">
+                <ion-icon *ngFor="let s of stars(p.rating?.rate)"
+                          [name]="s" aria-hidden="true"></ion-icon>
+                <ion-badge *ngIf="p.rating as r" color="medium" style="margin-left:8px;">
+                  {{ r.rate | number:'1.1-1' }}
+                </ion-badge>
+              </div>
+              <div class="price">Bs {{ p.price | number:'1.2-2' }}</div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
 </ion-content>
+
