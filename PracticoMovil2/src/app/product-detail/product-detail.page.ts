@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButtons, IonBackButton, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent, IonIcon, IonBadge, IonSpinner } from '@ionic/angular/standalone';
 import { ActivatedRoute } from '@angular/router';
 import { PlacesHolderService } from '../services/places-holder-service';
@@ -11,7 +10,7 @@ import { Product } from '../models/places-holder.model';
   templateUrl: './product-detail.page.html',
   styleUrls: ['./product-detail.page.scss'],
   standalone: true,
-  imports: [IonSpinner, IonBadge, IonIcon, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonSpinner, IonBadge, IonIcon, IonCardContent, IonCardSubtitle, IonCardTitle, IonCardHeader, IonCard, IonBackButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule]
 })
 export class ProductDetailPage implements OnInit {
   private route = inject(ActivatedRoute);

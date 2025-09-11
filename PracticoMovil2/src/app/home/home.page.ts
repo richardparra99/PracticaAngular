@@ -69,7 +69,6 @@ export class HomePage {
   trackById(_i: number, p: Product) { return p.id; }
 
   stars(rate = 0) {
-    // Devuelve un arreglo de 5 strings: 'star', 'star-half', 'star-outline'
     const res: string[] = [];
     const full = Math.floor(rate);
     const half = rate - full >= 0.5 ? 1 : 0;

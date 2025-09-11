@@ -1,0 +1,8 @@
+<ion-content>
+  <ion-title>Formulario de Usuarios</ion-title>
+  <ion-input [formControl]="getName()" label="Nombre:"></ion-input>
+  <ion-input [formControl]="getEdad()" label="Edad:"></ion-input>
+  {{mensaje()}}
+
+  <ion-button (click)="guardarDatos()">Guardar</ion-button>
+</ion-content>
