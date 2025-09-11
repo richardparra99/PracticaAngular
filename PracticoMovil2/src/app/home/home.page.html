@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Pull to refresh -->
+
   <ion-refresher slot="fixed" (ionRefresh)="loadProducts(selected() === 'Todos' ? undefined : selected()); $event.target.complete()">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -13,7 +13,7 @@
   <!-- Buscador -->
   <ion-searchbar placeholder="Buscar productos..."
                  (ionInput)="onSearch($event)"
-                 style="--box-shadow:none; margin: 10px 12px;"></ion-searchbar>
+                 style="--box-shadow:none; margin: 10px 12px;" class="buscador"></ion-searchbar>
 
   <!-- Chips de categorías -->
   <div style="padding: 0 12px 6px; overflow-x:auto; white-space:nowrap;">
@@ -30,7 +30,6 @@
     <p style="padding: 12px;">{{ error() }}</p>
   </ion-text>
 
-  <!-- Skeletons mientras carga -->
   <ng-container *ngIf="loading(); else listTpl">
     <ion-grid>
       <ion-row>
