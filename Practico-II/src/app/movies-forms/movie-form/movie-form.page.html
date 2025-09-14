@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isNew() ? 'Nueva película' : 'Editar película' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form (ngSubmit)="save()" [formGroup]="form" style="padding:12px;">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input
+        type="text"
+        fill="outline"
+        [clearInput]="true"
+        formControlName="name"
+        placeholder="Nombre de película"
+        class="input-nombre">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-input
+        type="text"
+        fill="outline"
+        formControlName="description"
+        placeholder="Breve descripción"
+        class="input-descripcion">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">URL de imagen</ion-label>
+      <ion-input
+        type="url"
+        fill="outline"
+        formControlName="image"
+        placeholder="https://ejemplo.com/poster.jpg"
+        class="input-url">
+      </ion-input>
+    </ion-item>
+
+    <!-- Hint si la URL no es válida -->
+    <div *ngIf="form.controls.image.touched && form.controls.image.invalid"
+         style="color: var(--ion-color-danger); padding: 4px 12px 0;">
+      Ingresa una URL que empiece con http:// o https://
+    </div>
+
+    <!-- Previsualización con fallback -->
+    <div style="text-align:center; margin:16px 0;" *ngIf="form.value.image">
+      <img
+        [src]="previewSrc"
+        (error)="imgFallback($event)"
+        referrerpolicy="no-referrer"
+        alt="preview"
+        style="max-width:100%; max-height:200px; object-fit:contain;">
+    </div>
+
+    <ion-button type="submit" expand="block" class="btn-save" [disabled]="form.invalid">
+      {{ isNew() ? 'Crear' : 'Guardar cambios' }}
+    </ion-button>
+  </form>
+</ion-content>
