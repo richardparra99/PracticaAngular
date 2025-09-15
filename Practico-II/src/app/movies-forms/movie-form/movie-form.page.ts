@@ -45,7 +45,6 @@ export class MovieFormPage implements OnInit {
     }
   }
 
-  // --- Fallback y normalización para la previsualización ---
   fallback = 'assets/no-image.png';
 
   private normalizeUrl(v?: string | null) {

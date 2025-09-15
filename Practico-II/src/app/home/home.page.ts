@@ -1,24 +1,27 @@
 import { Component, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonItemSliding, IonList, IonItem, IonAvatar, IonLabel, IonBadge, IonItemOptions, IonItemOption, IonIcon, IonFabButton } from '@ionic/angular/standalone';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonItemSliding, IonList,
+  IonItem, IonLabel, IonItemOptions, IonItemOption,
+  IonFabButton, IonThumbnail, IonImg } from '@ionic/angular/standalone';
 import { SqliteServices } from '../services/sqlite-services';
 import { Movie } from '../models/movie.model';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
 
 @Component({
   selector: 'app-home',
   standalone: true,
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonFabButton, IonIcon, IonItemOption, IonItemOptions, 
-    IonBadge, IonLabel, IonAvatar, IonItem, IonList, IonItemSliding, 
-    IonFab, IonHeader, IonToolbar, IonTitle, IonContent, RouterLink, CommonModule],
+  imports: [IonImg, 
+    IonFabButton, IonItemOption, IonItemOptions, IonLabel, IonItem, IonList, IonItemSliding,
+    IonThumbnail, IonFab, IonHeader, IonToolbar, IonTitle, IonContent, RouterLink, CommonModule
+  ],
 })
 export class HomePage implements OnInit{
   private db = inject(SqliteServices)
 
-  @ViewChild('list', { read: IonList }) list?: IonList; // 👈 referencia al IonList
+  @ViewChild('list', { read: IonList }) list?: IonList;
 
   fallback = 'assets/no-image.png';
   loading = signal<boolean>(false);
@@ -41,22 +44,28 @@ export class HomePage implements OnInit{
     }
   }
 
-  async remove(m: Movie) {                       // 👈 sin el parámetro "sliding"
+  async remove(m: Movie) {                     
     await this.db.remove(m.id!);
-    await this.list?.closeSlidingItems();        // 👈 cierra cualquier sliding abierto
+    await this.list?.closeSlidingItems();       
     await this.load();
   }
 
+
   normalizeUrl(v?: string | null) {
     v = (v ?? '').trim();
-    if (!v) return '';                     // fuerza placeholder si viene vacío
-    if (!/^https?:\/\//i.test(v)) return '';// si no empieza con http/https usa placeholder
+    if (!v) return '';                     
+    if (!/^https?:\/\//i.test(v)) return '';
     return v;
   }
 
+  ionViewWillEnter() {
+    this.load();
+  }
+
+
   onImgError(ev: Event) {
     const img = ev.target as HTMLImageElement;
-    img.onerror = null;               // evita loops si falla también el placeholder
+    img.onerror = null;               
     img.src = this.fallback;
   }
 
